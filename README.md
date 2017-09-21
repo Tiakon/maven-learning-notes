@@ -286,11 +286,15 @@ Assuming A is the pom defined in the preceding example, the end result would be 
 九.依赖冲突
 ------
 
-	1.短路优先:【优先解析路径短的版本】
+	1.短路优先:
+	
 		C->B->A->X1(jar)
 		C->B->X2(jar)
 
-	C依赖B,B依赖A,A和B都包含同一个不同版本的Jar,则取B的依赖版本。（c的pom.xml中不必注明坐标）
+	【C依赖B,B依赖A,A和B都包含同一个不同版本的Jar,则取B的依赖版本。（c的pom.xml中不必注明jar坐标）】
 
 	2.先声明先优先
-		如果路径相同长度相同，则谁先声明，先解析谁
+	
+		如果路径相同长度相同，则谁先声明，先解析谁。
+
+	【C依赖A和B,A和B都包含同一个不同版本的Jar,谁依赖在前取谁的依赖版本。】
