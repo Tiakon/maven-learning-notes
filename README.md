@@ -1,3 +1,5 @@
+Maven Learning Notes
+=========
 Maven学习笔记
 =========
 
@@ -281,3 +283,14 @@ Assuming A is the pom defined in the preceding example, the end result would be 
 
 假设A是前面示例中定义的pom，那么最终结果将是相同的。**所有管理的依赖项都将被合并到B中，除了在这个pom中定义的d之外。**
 
+九.依赖冲突
+------
+
+	1.短路优先:【优先解析路径短的版本】
+		C->B->A->X1(jar)
+		C->B->X2(jar)
+
+	C依赖B,B依赖A,A和B都包含同一个不同版本的Jar,则取B的依赖版本。（c的pom.xml中不必注明坐标）
+
+	2.先声明先优先
+		如果路径相同长度相同，则谁先声明，先解析谁
