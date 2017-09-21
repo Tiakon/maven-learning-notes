@@ -1,6 +1,3 @@
-# Maven Learning Notes
-Take notes that are recorded whenlearning Maven in imooc
-
 Maven学习笔记
 =========
 
@@ -67,7 +64,7 @@ Maven学习笔记
 			2. 远程仓库
 			3. 镜像仓库
 
-更改仓库默认路径
+五.更改仓库默认路径
 ------
 已安装到本地仓库中的jar包位置：
 
@@ -88,7 +85,7 @@ Maven学习笔记
 
 **将localRepository便签内的值替换成新路径即可。**
 
-maven生命周期
+六.maven生命周期
 ---------
 
 完整的项目构建过程包括：
@@ -111,3 +108,176 @@ maven生命周期
     			3. post-site	在生成项目站点后要完成的工作
     			4. site-deploy	发布生成的站点到服务器上
 			
+七.maven中pom.xml常见元素介绍
+---------------
+	<?xml version="1.0" encoding="UTF-8"?>
+	<project xmlns="http://maven.apache.org/POM/4.0.0"
+	         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	    <!--指定了当前pom的版本-->
+	    <modelVersion>4.0.0</modelVersion>
+	
+	    <groupId>com.tiakon.maven.demo</groupId>
+	    <artifactId>HoictasStudio-MavenDemo01</artifactId>
+	    <version>1.0-SNAPSHOT</version>
+	    <!--
+	        第一个0表示大版本号
+	        第二个0表示分支版本号
+	        第三个0表示小版本号
+	        0.0.1
+	        snapshot    快照
+	        alpha       内部测试
+	        beta        公测
+	        Release     稳定
+	        GA          正式发布
+	    -->
+	    <!--
+	        打包方式:默认是jar,可选war、zip、pom
+	        <packaging></packaging>
+	    -->
+	    <!--
+	        项目名
+	        <name></name>
+	        项目地址
+	        <url></url>
+	        项目描述
+	        <description></description>
+	        开发人员列表
+	        <developers></developers>
+	        许可证信息
+	        <licenses></licenses>
+	        组织信息
+	        <organization></organization>
+	    -->
+	
+	
+	    <!--依赖列表-->
+	    <dependencies>
+	        <!--依赖项-->
+	        <dependency>
+	            <groupId>junit</groupId>
+	            <artifactId>junit</artifactId>
+	            <version>RELEASE</version>
+	            <!--<type></type>-->
+	            <!--依赖范围-->
+	            <!--<scope></scope>-->
+	            <!--设置依赖是否可选（默认）false-->
+	            <!--<optional></optional>-->
+	            <!--排斥依赖传递列表-->
+	            <!--
+	                <exclusions>
+	                    <exclusion>
+	                    </exclusion>
+	                </exclusions>
+	            -->
+	        </dependency>
+	    </dependencies>
+	    <!--依赖的管理，作用主要定义在父模块中，对子模块进行管理-->
+	    <!--
+	        <dependencyManagement>
+	            <dependencies>
+	
+	            </dependencies>
+	        </dependencyManagement>
+	    -->
+	    <!--对构件的行为提供相应的支持-->
+	    <build>
+	        <!--插件列表-->
+	        <plugins>
+	            <plugin>
+	                <groupId>org.apache.maven.plugins</groupId>
+	                <artifactId>maven-source-plugin</artifactId>
+	                <version>3.0.1</version>
+	
+	                <executions>
+	                    <execution>
+	                        <phase>package</phase>
+	                        <goals>
+	                            <goal>
+	                                jar-no-fork
+	                            </goal>
+	                        </goals>
+	                    </execution>
+	                </executions>
+	            </plugin>
+	        </plugins>
+	    </build>
+	    <!--通常用于子模块对父模块pom的继承-->
+	    <!--<parent></parent>-->
+	    <!--用来聚合运行Maven项目，指定多个模块一起编译-->
+	    <!--
+	        <modules>
+	            <module></module>
+	        </modules>
+	    -->
+
+	</project>
+八.Maven的依赖范围
+----------
+
+	三种classpath
+		1. 编译
+		2. 测试
+		3. 运行
+	
+**maven提供了6种可选依赖范围:**
+
+	1. compile:	默认范围，编译测试运行都有效。
+	2. provided:	在编译和测试时有效。（比如说在开发JavaEE时，你在本地运行的servlet，
+	是需要调用已添加到项目中的servlet-api.jar这个jar包的。这个过程就包含了编译【就是
+	把Java文件编译成class文件的过程中也要调用】和测试【测试就是在本地运行】，那么他说
+	的运行是指，整个项目已开发完成，编译、测试通过后，将class文件或包含有class文件的war包
+	发布到服务器上的Tomcat中运行，这时启动项目，就可以直接调Tomcat中的servlet-api.jar，
+	不必再将自己的jar包添加到项目中去。也就是说当你选择provided时，项目发布时Maven不会将
+	你添加的jar包，加入到项目中。）
+
+	3. runtime:	在测试和运行时有效。(典型例子：JDBC驱动的实现。)
+	4. test:	只在测试是有效。
+	5. system:	类似provided，与本机系统相关联，可移植性差。
+	6. import:	导入范围，他只是用在dependencyManagement中，表示从其他的pom中导
+	入dependecy的配置。（以下引用官网案例并不难理解。）
+
+	Importing Dependencies
+
+	<project>
+	  <modelVersion>4.0.0</modelVersion>
+	  <groupId>maven</groupId>
+	  <artifactId>B</artifactId>
+	  <packaging>pom</packaging>
+	  <name>B</name>
+	  <version>1.0</version>
+	  <dependencyManagement>
+		    <dependencies>
+				      <dependency>
+				        <groupId>maven</groupId>
+				        <artifactId>A</artifactId>
+				        <version>1.0</version>
+				        <type>pom</type>
+				        <scope>import</scope>
+				      </dependency>
+						      <dependency>
+						        <groupId>test</groupId>
+						        <artifactId>d</artifactId>
+						        <version>1.0</version>
+						      </dependency>
+		    </dependencies>
+	  </dependencyManagement>
+	  <dependencies>
+			    <dependency>
+			      <groupId>test</groupId>
+			      <artifactId>a</artifactId>
+			      <version>1.0</version>
+			      <scope>runtime</scope>
+			    </dependency>
+					    <dependency>
+					      <groupId>test</groupId>
+					      <artifactId>c</artifactId>
+					      <scope>runtime</scope>
+					    </dependency>
+	  </dependencies>
+	</project>
+
+Assuming A is the pom defined in the preceding example, the end result would be the same. **All of A's managed dependencies would be incorporated into B except for d since it is defined in this pom.**
+
+假设A是前面示例中定义的pom，那么最终结果将是相同的。**所有管理的依赖项都将被合并到B中，除了在这个pom中定义的d之外。**
+
