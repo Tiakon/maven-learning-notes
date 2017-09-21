@@ -32,7 +32,7 @@ Maven学习笔记
 
 三.常用命令
 ------
-    mvn -v 			查看maven版本
+    mvn -v 		查看maven版本
     	 compile	编译
     	 test		测试
     	 package	打包
@@ -95,8 +95,8 @@ Maven学习笔记
 **maven三套独立的生命周期**
 
     	clean 	清理项目
-    			1.pre-clean		执行清理前的工作
-    			2.clean			清理上一次构建生成的所有文件
+    			1.pre-clean	执行清理前的工作
+    			2.clean		清理上一次构建生成的所有文件
     			3.post-clean 	执行清理后的文件
     
     	default 构建项目（最核心）
@@ -104,7 +104,7 @@ Maven学习笔记
     
     	site 	生成项目站点
     			1. pre-site 	在生成项目站点前要完成的工作
-    			2. site 		生成项目的站点文档
+    			2. site 	生成项目的站点文档
     			3. post-site	在生成项目站点后要完成的工作
     			4. site-deploy	发布生成的站点到服务器上
 			
