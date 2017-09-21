@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!--指定了当前pom的版本-->
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.tiakon.maven.demo</groupId>
+    <artifactId>HoictasStudio-MavenDemo01</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <!--
+        第一个0表示大版本号
+        第二个0表示分支版本号
+        第三个0表示小版本号
+        0.0.1
+        snapshot    快照
+        alpha       内部测试
+        beta        公测
+        Release     稳定
+        GA          正式发布
+    -->
+    <!--
+        打包方式:默认是jar,可选war、zip、pom
+        <packaging></packaging>
+    -->
+    <!--
+        项目名
+        <name></name>
+        项目地址
+        <url></url>
+        项目描述
+        <description></description>
+        开发人员列表
+        <developers></developers>
+        许可证信息
+        <licenses></licenses>
+        组织信息
+        <organization></organization>
+    -->
+
+
+    <!--依赖列表-->
+    <dependencies>
+        <!--依赖项-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>RELEASE</version>
+            <!--<type></type>-->
+            <!--依赖范围-->
+            <scope>test</scope>
+            <!--设置依赖是否可选（默认）false-->
+            <!--<optional></optional>-->
+            <!--排斥依赖传递列表-->
+            <!--
+                <exclusions>
+                    <exclusion>
+                    </exclusion>
+                </exclusions>
+            -->
+        </dependency>
+    </dependencies>
+    <!--依赖的管理，作用主要定义在父模块中，对子模块进行管理-->
+    <!--
+        <dependencyManagement>
+            <dependencies>
+
+            </dependencies>
+        </dependencyManagement>
+    -->
+    <!--对构件的行为提供相应的支持-->
+    <build>
+        <!--插件列表-->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>
+                                jar-no-fork
+                            </goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <!--通常用于子模块对父模块pom的继承-->
+    <!--<parent></parent>-->
+    <!--用来聚合运行Maven项目，指定多个模块一起编译-->
+    <!--
+        <modules>
+            <module></module>
+        </modules>
+    -->
+
+</project>
