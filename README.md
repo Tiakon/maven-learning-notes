@@ -32,7 +32,7 @@ Maven学习笔记
 
 三.常用命令
 ------
-    mvn -v 		查看maven版本
+	    mvn -v 		查看maven版本
     	 compile	编译
     	 test		测试
     	 package	打包
