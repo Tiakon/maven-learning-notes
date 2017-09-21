@@ -8,6 +8,12 @@
     <groupId>com.tiakon.maven.demo</groupId>
     <artifactId>HoictasStudio-MavenDemo01</artifactId>
     <version>1.0-SNAPSHOT</version>
+        
+    <!--指定编码格式-->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+         
     <!--
         第一个0表示大版本号
         第二个0表示分支版本号
