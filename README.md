@@ -298,3 +298,95 @@ Assuming A is the pom defined in the preceding example, the end result would be 
 		如果路径相同长度相同，则谁先声明，先解析谁。
 
 	【C依赖A和B,A和B都包含同一个不同版本的Jar,谁依赖在前取谁的依赖版本。】
+
+十.聚合与继承
+-------
+### 聚合 ###
+
+	<packaging>pom</packaging>
+    <modules>
+        <module>../HoictasStudio-MavenDemo01</module>
+        <module>../HoictasStudio-MavenDemo02</module>
+        <module>../HoictasStudio-MavenDemo03</module>
+    </modules>
+
+假设在**HoictasStudio-MavenParent**模块中添如以上代码，输入`clean install`命令后，即可同时安装多个jar到本地仓库中
+
+	    [INFO] HoictasStudio-MavenDemo01 .......................... SUCCESS [  4.618 s]
+	    [INFO] HoictasStudio-MavenDemo02 .......................... SUCCESS [  0.828 s]
+	    [INFO] HoictasStudio-MavenDemo03 .......................... SUCCESS [  0.923 s]
+	    [INFO] HoictasStudio-MavenParent .......................... SUCCESS [  0.021 s]
+
+
+### 继承 ###
+
+**根据官方文档说明继承会根据父模块与子模块的包含与否，对pom.xml的写法则有两种。**
+
+#### 第一种写法 ####
+
+假设我们有两个模块，前一个叫 `com.mycompany.app:my-app:1`，后一个叫`com.mycompany.app:my-module:1`。
+
+my-app的pom文件为：
+
+	<project>
+	  <modelVersion>4.0.0</modelVersion>
+	  <groupId>com.mycompany.app</groupId>
+	  <artifactId>my-app</artifactId>
+	  <version>1</version>
+	</project>
+
+my-module的pom文件为：
+
+	<project>
+	  <modelVersion>4.0.0</modelVersion>
+	  <groupId>com.mycompany.app</groupId>
+	  <artifactId>my-module</artifactId>
+	  <version>1</version>
+	</project>
+	
+我们指定如下项目结构：
+
+		.
+		 |-- my-module
+		 |   `-- pom.xml
+		 `-- pom.xml
+
+那么，我们需要`my-module`去继承`my-app`，则需要在`my-module`的pom文件中添加以下代码：
+
+		<project>
+		  <parent>
+		    <groupId>com.mycompany.app</groupId>
+		    <artifactId>my-app</artifactId>
+		    <version>1</version>
+		  </parent>
+		  <modelVersion>4.0.0</modelVersion>
+		  <groupId>com.mycompany.app</groupId>
+		  <artifactId>my-module</artifactId>
+		  <version>1</version>
+		</project>
+
+#### 第二种写法 ####
+
+    However, that would work if the parent project was already installed inour local repository or was in that specific directory structure (parent pom.xml is one directory higher than that of the module's pom.xml). But what if the parent is not yet installed and if the directory structure is
+	.
+ 	 |-- my-module
+ 	 |   `-- pom.xml
+ 	 `-- parent
+	     `-- pom.xml	
+
+上一段话摘自官网对继承的介绍，就是说如果你的父模块已在本地安装或者父模块不包含子模块，目录级别甚至是
+比子模块的还要高，就在第一种写法上添加`<relativePath>`标签。
+	
+	<project>
+		  <parent>
+		    <groupId>com.mycompany.app</groupId>
+		    <artifactId>my-app</artifactId>
+		    <version>1</version>
+		    <relativePath>../parent/pom.xml</relativePath>
+		  </parent>
+		  <modelVersion>4.0.0</modelVersion>
+		  <artifactId>my-module</artifactId>
+	</project>
+
+笔者在看视频时就发现，当父模块与子模块处于同一级别时，在按照视频中的写法（第一种写法）test时就会报错，
+而此时的情况是不包含子模块，所以应该在`<parent>`标签中添加`<relativePath>`标签即可测试通过。
