@@ -225,6 +225,7 @@ Maven学习笔记
 **maven提供了6种可选依赖范围:**
 
 	1. compile:	默认范围，编译测试运行都有效。
+	
 	2. provided:	在编译和测试时有效。（比如说在开发JavaEE时，你在本地运行的servlet，
 	是需要调用已添加到项目中的servlet-api.jar这个jar包的。这个过程就包含了编译【就是
 	把Java文件编译成class文件的过程中也要调用】和测试【测试就是在本地运行】，那么他说
@@ -236,6 +237,7 @@ Maven学习笔记
 	3. runtime:	在测试和运行时有效。(典型例子：JDBC驱动的实现。)
 	4. test:	只在测试是有效。
 	5. system:	类似provided，与本机系统相关联，可移植性差。
+	
 	6. import:	导入范围，他只是用在dependencyManagement中，表示从其他的pom中导
 	入dependecy的配置。（以下引用官网案例并不难理解。）
 
@@ -367,7 +369,9 @@ my-module的pom文件为：
 
 #### 第二种写法 ####
 
-    However, that would work if the parent project was already installed inour local repository or was in that specific directory structure (parent pom.xml is one directory higher than that of the module's pom.xml). But what if the parent is not yet installed and if the directory structure is
+    However, that would work if the parent project was already installed inour local repository or was in that specific 
+    directory structure (parent pom.xml is one directory higher than that of the module's pom.xml). But what if the parent 
+    is not yet installed and if the directory structure is
 	.
  	 |-- my-module
  	 |   `-- pom.xml
