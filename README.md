@@ -137,7 +137,16 @@ Maven学习笔记
 	    <!--
 	        打包方式:默认是jar,可选war、zip、pom
 	        <packaging></packaging>
-	    -->
+	        编码方式	
+		<properties>
+        		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+   		</properties>
+		
+	    -->
+	    
+	
+	    
+	    
 	    <!--
 	        项目名
 	        <name></name>
