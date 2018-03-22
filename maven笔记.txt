@@ -23,10 +23,10 @@ hello maven的小例子
 			-main
 				-java
 					-package
+				-resources
 			-test
 				-java
 					-package
-			resources
 	pom.xml配置文件
 	mvn test	
 		生成target文件夹
