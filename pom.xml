@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.tiakon.maven.demo</groupId>
-    <artifactId>HoictasStudio-MavenDemo01</artifactId>
+    <artifactId>maven-learning-notes</artifactId>
     <version>1.0-SNAPSHOT</version>
         
     <!--指定编码格式-->
