@@ -401,3 +401,19 @@ my-module的pom文件为：
 
 笔者在看视频时就发现，当父模块与子模块处于同一级别时，在按照视频中的写法（第一种写法）test时就会报错，
 而此时的情况是不包含子模块，所以应该在`<parent>`标签中添加`<relativePath>`标签即可测试通过。
+
+十一.maven配置阿里云镜像
+-------
+
+修改`setting.xml`文件，添加镜像地址
+
+	 <mirrors>
+	    <mirror>
+	      <id>alimaven</id>
+	      <name>aliyun maven</name>
+	      <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+	      <mirrorOf>central</mirrorOf>
+	    </mirror>
+	  </mirrors>
+
+> 这个地址下载 jar 包的速度，谁用谁知道！
