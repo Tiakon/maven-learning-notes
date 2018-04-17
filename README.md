@@ -408,12 +408,12 @@ my-module的pom文件为：
 修改`setting.xml`文件，添加镜像地址
 
 	 <mirrors>
-	    <mirror>
-	      <id>alimaven</id>
-	      <name>aliyun maven</name>
-	      <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-	      <mirrorOf>central</mirrorOf>
-	    </mirror>
+	      <mirror>
+		<id>nexus-aliyun</id>
+		<mirrorOf>*</mirrorOf>
+		<name>Nexus aliyun</name>
+		<url>http://maven.aliyun.com/nexus/content/groups/public</url>
+	      </mirror>
 	  </mirrors>
 
 > 这个地址下载 jar 包的速度，谁用谁知道！
