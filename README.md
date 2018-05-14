@@ -90,14 +90,13 @@ C:\Users\用户\.m2\repository\com\tiakon\demo
 安装路径conf文件夹下settings.xml文件
 打开找到这段备注是的代码：
 
-      ```xml	
+```xml
 <!-- localRepository
      | The path to the local repository maven will use to store artifacts.
      | Default: ${user.home}/.m2/repository
     <localRepository>/path/to/local/repo</localRepository>
 -->
-      ```
-
+```
 复制粘贴出来
 
 ```xml
